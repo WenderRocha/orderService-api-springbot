@@ -13,7 +13,7 @@ public enum OrderStatus {
     private Integer code;
     private String description;
 
-    public OrderStatus toEnum(Integer code) {
+    public static  OrderStatus toEnum(Integer code) {
         if (code == null) {
             return null;
         }
