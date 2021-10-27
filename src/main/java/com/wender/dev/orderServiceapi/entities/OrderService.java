@@ -1,21 +1,31 @@
 package com.wender.dev.orderServiceapi.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wender.dev.orderServiceapi.entities.enums.OrderPriority;
 import com.wender.dev.orderServiceapi.entities.enums.OrderStatus;
 import lombok.*;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Entity
 public class OrderService implements Serializable {
 
     @EqualsAndHashCode.Include
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dataOpening;
+
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dateClosing;
+
     private String comments;
 
     @Setter(AccessLevel.NONE)
@@ -26,7 +36,12 @@ public class OrderService implements Serializable {
     @Getter(AccessLevel.NONE)
     private Integer status;
 
+    @ManyToOne
+    @JoinColumn(name = "technical_id")
     private Technical technical;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
     private Client client;
 
     public OrderService() {
