@@ -1,5 +1,6 @@
 package com.wender.dev.orderServiceapi.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.List;
 @Entity
 public class Client extends Person implements Serializable {
 
+    @JsonIgnore
     @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy = "client")
     private List<OrderService> list = new ArrayList<>();
