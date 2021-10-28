@@ -9,7 +9,6 @@ import com.wender.dev.orderServiceapi.repositories.ClientRepository;
 import com.wender.dev.orderServiceapi.repositories.OrderServiceRepository;
 import com.wender.dev.orderServiceapi.repositories.TechnicalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -28,13 +27,15 @@ public class DBService {
     public void getInstaceDB() {
 
         Technical t1 = new Technical(null, "Tomás Breno Peixoto", "360.008.321-09", "(47) 98229-1358");
+        Technical t2 = new Technical(null, "Clarice Hadassa Juliana da Mota", "779.550.269-50", "(69) 98362-7366");
+
         Client c1 = new Client(null, "Lívia Rosângela Monteiro", "254.587.220-27", "(85) 98717-2694");
         OrderService os1 = new OrderService(null, "Teste create OS", OrderPriority.HIGHT, OrderStatus.PROGRESS, t1, c1);
 
         t1.getList().add(os1);
         c1.getList().add(os1);
 
-        technicalRepository.saveAll(Arrays.asList(t1));
+        technicalRepository.saveAll(Arrays.asList(t1,t2));
         clientRepository.saveAll(Arrays.asList(c1));
         orderServiceRepository.saveAll(Arrays.asList(os1));
     }

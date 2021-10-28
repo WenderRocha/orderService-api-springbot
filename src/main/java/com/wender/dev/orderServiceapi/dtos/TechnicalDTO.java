@@ -1,7 +1,6 @@
 package com.wender.dev.orderServiceapi.dtos;
 
 import com.wender.dev.orderServiceapi.entities.Technical;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

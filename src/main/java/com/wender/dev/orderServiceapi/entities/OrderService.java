@@ -1,7 +1,6 @@
 package com.wender.dev.orderServiceapi.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wender.dev.orderServiceapi.entities.enums.OrderPriority;
 import com.wender.dev.orderServiceapi.entities.enums.OrderStatus;
 import lombok.*;
