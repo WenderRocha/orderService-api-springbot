@@ -1,7 +1,6 @@
 package com.wender.dev.orderServiceapi.resources;
 
 import com.wender.dev.orderServiceapi.dtos.TechnicalDTO;
-import com.wender.dev.orderServiceapi.entities.Technical;
 import com.wender.dev.orderServiceapi.services.TechnicalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
