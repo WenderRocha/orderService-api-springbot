@@ -1,6 +1,7 @@
 package com.wender.dev.orderServiceapi.resources.exceptions;
 
 
+import com.wender.dev.orderServiceapi.services.exceptions.DataIntegratyViolationException;
 import com.wender.dev.orderServiceapi.services.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +14,14 @@ import java.time.Instant;
 @ControllerAdvice
 public class ResourceExceptionHandler {
     @ExceptionHandler(ObjectNotFoundException.class)
-    public ResponseEntity<StandardError> objectNotFoundException(ObjectNotFoundException e, HttpServletRequest request){
+    public ResponseEntity<StandardError> objectNotFoundException(ObjectNotFoundException e, HttpServletRequest request) {
         StandardError error = new StandardError(Instant.now(), HttpStatus.NOT_FOUND.value(), e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(DataIntegratyViolationException.class)
+    public ResponseEntity<StandardError> DataIntegratyViolationException(DataIntegratyViolationException e, HttpServletRequest request) {
+        StandardError error = new StandardError(Instant.now(), HttpStatus.BAD_REQUEST.value(), e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 }

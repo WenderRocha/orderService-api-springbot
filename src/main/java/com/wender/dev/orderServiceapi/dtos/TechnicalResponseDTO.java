@@ -10,18 +10,13 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter
 @Setter
-public class TechnicalDTO implements Serializable {
-
+public class TechnicalResponseDTO implements Serializable {
     private Long id;
     private String name;
-    private String cpf;
-    private String phone;
 
-    public TechnicalDTO(Technical obj) {
+    public TechnicalResponseDTO(Technical obj) {
         this.id = obj.getId();
         this.name = obj.getName();
-        this.cpf = obj.getCpf();
-        this.phone = obj.getPhone();
 
     }
 }
