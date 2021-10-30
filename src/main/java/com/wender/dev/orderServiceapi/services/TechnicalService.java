@@ -15,12 +15,12 @@ public class TechnicalService {
     @Autowired
     private TechnicalRepository repository;
 
-    public Technical findById(Long id){
+    public Technical findById(Long id) {
         Optional<Technical> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found! Id: " + id + ", Type: " + Technical.class.getName()));
     }
 
-    public List<Technical> findAll(){
+    public List<Technical> findAll() {
         return repository.findAll();
     }
 }

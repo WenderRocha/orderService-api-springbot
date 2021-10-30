@@ -1,6 +1,7 @@
 package com.wender.dev.orderServiceapi.resources;
 
 import com.wender.dev.orderServiceapi.dtos.TechnicalDTO;
+import com.wender.dev.orderServiceapi.entities.Technical;
 import com.wender.dev.orderServiceapi.services.TechnicalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +23,25 @@ public class TechnicalResource {
 
     @GetMapping
     public ResponseEntity<List<TechnicalDTO>> findAll() {
-        List<TechnicalDTO> listDTO = service.findAll().stream().map(obj -> new TechnicalDTO(obj)).collect(Collectors.toList());
+        //List<Technical> list = service.findAll();
+
+        //start method 1
+        //List<TechnicalDTO> listDTO = new ArrayList<>();
+        //for(Technical obj : list){
+            //listDTO.add(new TechnicalDTO(obj));
+        //}
+        //end method 1
+
+        //start cod 1 : resume method 1
+        //list.forEach(obj -> listDTO.add(new TechnicalDTO(obj)));
+        //end cod 1 : resume method 1
+
+        //start cod 2 : resume method 1 and cod 1
+        List<TechnicalDTO> listDTO = service.findAll()
+                .stream().map(obj -> new TechnicalDTO(obj))
+                .collect(Collectors.toList());
+        //end cod 2 : resume method 1 and cod 1
+
         return ResponseEntity.ok().body(listDTO);
     }
 
