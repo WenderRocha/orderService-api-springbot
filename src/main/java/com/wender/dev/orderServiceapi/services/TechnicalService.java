@@ -8,7 +8,9 @@ import com.wender.dev.orderServiceapi.services.exceptions.ObjectNotFoundExceptio
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -28,12 +30,27 @@ public class TechnicalService {
 
     public Technical create(TechnicalDTO objDTO){
         if(findByCPF(objDTO) != null){
-            throw new DataIntegratyViolationException("cpf already registered");
+            throw new DataIntegratyViolationException("CPF já registrado na base de dados!");
         }
         return repository.save(new Technical(null, objDTO.getName(), objDTO.getCpf(), objDTO.getPhone()));
+    }
+
+    public Technical update(Long id, @Valid TechnicalDTO objDTO){
+        Technical oldObj = findById(id);
+
+        if(findByCPF(objDTO) != null && !Objects.equals(findByCPF(objDTO).getId(), id)){
+            throw new DataIntegratyViolationException("CPF já registrado na base de dados!");
+        }
+
+        oldObj.setName(objDTO.getName());
+        oldObj.setCpf(objDTO.getCpf());
+        oldObj.setPhone(objDTO.getPhone());
+        return repository.save(oldObj);
     }
 
     private Technical findByCPF(TechnicalDTO objDTO){
         return repository.findByCPF(objDTO.getCpf());
     }
+
+
 }

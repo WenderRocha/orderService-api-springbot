@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @NoArgsConstructor
@@ -22,7 +23,6 @@ public abstract class Person implements Serializable {
     private String name;
 
     @EqualsAndHashCode.Include
-    @CPF
     private String cpf;
 
     private String phone;

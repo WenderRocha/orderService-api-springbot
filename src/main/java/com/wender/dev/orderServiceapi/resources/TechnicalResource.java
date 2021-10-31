@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,10 +52,16 @@ public class TechnicalResource {
     }
 
     @PostMapping
-    public ResponseEntity<TechnicalDTO> create(@RequestBody TechnicalDTO objDTO) {
+    public ResponseEntity<TechnicalDTO> create(@Valid @RequestBody TechnicalDTO objDTO) {
         Technical newObj = service.create(objDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(newObj.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PostMapping(value = "/{id}")
+    public ResponseEntity<TechnicalDTO> update(@Valid @PathVariable Long id, @Valid @RequestBody TechnicalDTO objDTO){
+        TechnicalDTO newObj = new TechnicalDTO(service.update(id, objDTO));
+        return ResponseEntity.ok().body(newObj);
     }
 
 }
