@@ -19,11 +19,10 @@ public abstract class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
 
+    @CPF
     @EqualsAndHashCode.Include
     private String cpf;
-
     private String phone;
 }

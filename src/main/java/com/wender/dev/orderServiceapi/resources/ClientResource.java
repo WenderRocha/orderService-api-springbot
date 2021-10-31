@@ -1,9 +1,9 @@
 package com.wender.dev.orderServiceapi.resources;
 
-import com.wender.dev.orderServiceapi.dtos.TechnicalDTO;
-import com.wender.dev.orderServiceapi.dtos.TechnicalResponseDTO;
-import com.wender.dev.orderServiceapi.entities.Technical;
-import com.wender.dev.orderServiceapi.services.TechnicalService;
+import com.wender.dev.orderServiceapi.dtos.ClientDTO;
+import com.wender.dev.orderServiceapi.dtos.ClientResponseDTO;
+import com.wender.dev.orderServiceapi.entities.Client;
+import com.wender.dev.orderServiceapi.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,30 +15,30 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/technicals")
-public class TechnicalResource {
+@RequestMapping(value = "/clients")
+public class ClientResource {
 
     @Autowired
-    private TechnicalService service;
+    private ClientService service;
 
     @GetMapping
-    public ResponseEntity<List<TechnicalResponseDTO>> findAll() {
-        //List<Technical> list = service.findAll();
+    public ResponseEntity<List<ClientResponseDTO>> findAll() {
+        //List<Client> list = service.findAll();
 
         //start method 1
-        //List<TechnicalDTO> listDTO = new ArrayList<>();
-        //for(Technical obj : list){
-        //listDTO.add(new TechnicalDTO(obj));
+        //List<ClientDTO> listDTO = new ArrayList<>();
+        //for(Client obj : list){
+        //listDTO.add(new ClientDTO(obj));
         //}
         //end method 1
 
         //start cod 1 : resume method 1
-        //list.forEach(obj -> listDTO.add(new TechnicalDTO(obj)));
+        //list.forEach(obj -> listDTO.add(new ClientDTO(obj)));
         //end cod 1 : resume method 1
 
         //start cod 2 : resume method 1 and cod 1
-        List<TechnicalResponseDTO> listDTO = service.findAll()
-                .stream().map(obj -> new TechnicalResponseDTO(obj))
+        List<ClientResponseDTO> listDTO = service.findAll()
+                .stream().map(obj -> new ClientResponseDTO(obj))
                 .collect(Collectors.toList());
         //end cod 2 : resume method 1 and cod 1
 
@@ -46,14 +46,14 @@ public class TechnicalResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<TechnicalResponseDTO> findById(@PathVariable Long id) {
-        TechnicalResponseDTO objDTO = new TechnicalResponseDTO(service.findById(id));
+    public ResponseEntity<ClientResponseDTO> findById(@PathVariable Long id) {
+        ClientResponseDTO objDTO = new ClientResponseDTO(service.findById(id));
         return ResponseEntity.ok().body(objDTO);
     }
 
     @PostMapping
-    public ResponseEntity<TechnicalDTO> create(@Valid @RequestBody TechnicalDTO objDTO) {
-        Technical newObj = service.create(objDTO);
+    public ResponseEntity<ClientDTO> create(@Valid @RequestBody ClientDTO objDTO) {
+        Client newObj = service.create(objDTO);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequestUri()
                 .path("/{id}")
@@ -64,8 +64,8 @@ public class TechnicalResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<TechnicalDTO> update(@Valid @PathVariable Long id, @Valid @RequestBody TechnicalDTO objDTO) {
-        TechnicalDTO newObj = new TechnicalDTO(service.update(id, objDTO));
+    public ResponseEntity<ClientDTO> update(@Valid @PathVariable Long id, @Valid @RequestBody ClientDTO objDTO) {
+        ClientDTO newObj = new ClientDTO(service.update(id, objDTO));
         return ResponseEntity.ok().body(newObj);
     }
 
